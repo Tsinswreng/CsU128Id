@@ -1,4 +1,4 @@
-﻿namespace Tsinswreng.CsUInt128Id;
+﻿namespace Tsinswreng.CsU128Id;
 
 public interface IU128Id{
 	public UInt128 Value{get;set;}

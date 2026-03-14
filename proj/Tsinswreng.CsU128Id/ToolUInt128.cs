@@ -1,4 +1,4 @@
-namespace Tsinswreng.CsUInt128Id;
+namespace Tsinswreng.CsU128Id;
 using System.Buffers.Binary;
 public static partial class ToolU128Id{
 
