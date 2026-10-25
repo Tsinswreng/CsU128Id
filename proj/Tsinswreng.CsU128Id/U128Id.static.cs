@@ -1,9 +1,8 @@
 namespace Tsinswreng.CsU128Id;
 using System.Buffers.Binary;
-public static partial class ToolU128Id{
-
+public partial record struct U128Id{
 	public static string ToBase64Url(UInt128 value) {
-		var bytes = ToByteArr(value);
+		var bytes = value.ToByteArr();
 		string base64 = Convert.ToBase64String(bytes);
 		return base64.TrimEnd('=')
 			.Replace('+', '-')
@@ -40,40 +39,7 @@ public static partial class ToolU128Id{
 		return (UInt128)upper << 64 | lower;
 	}
 
-	public static u8[] ToByteArr(this UInt128 value){
-		var R = new u8[16];
-		var span = R.AsSpan();
-		ToByteSpan(value, ref span);
-		return R;
-	}
 
-
-	/// 高位在前
-
-	public static nil ToByteSpan(
-		this UInt128 value
-		,ref Span<u8> R
-	){
-		// 拆分为高64位（upper）和低64位（lower）
-		ulong upper = (ulong)(value >> 64);
-		ulong lower = (ulong)value;
-
-		// 大端序写入：先upper后lower
-		BinaryPrimitives.WriteUInt64BigEndian(R.Slice(0, 8), upper);  // 高64位在前
-		BinaryPrimitives.WriteUInt64BigEndian(R.Slice(8, 8), lower);  // 高64位在前8, 8), lower);  // 低64位在后
-		return NIL;
-	}
-
-
-	/// 高位在前
-
-	public static Span<u8> ToByteSpan(
-		this UInt128 value
-	){
-		Span<u8> R = new u8[16];
-		ToByteSpan(value, ref R);
-		return R;
-	}
 
 /// UInt128轉64進制(不是base64)字串
 /// 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_
@@ -134,8 +100,8 @@ public static partial class ToolU128Id{
 
 /// 64進制(不是base64)對照表
 /// 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_
-class Low64Base{
-	static List<List<object>> list2d= [
+internal class Low64Base{
+	public static List<List<object>> list2d= [
  [(u8)0b000000,(u8)'0']
 ,[(u8)0b000001,(u8)'1']
 ,[(u8)0b000010,(u8)'2']
