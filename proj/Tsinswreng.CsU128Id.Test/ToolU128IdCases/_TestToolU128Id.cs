@@ -3,7 +3,7 @@ using Tsinswreng.CsTreeTest;
 namespace Tsinswreng.CsU128Id.Test.ToolU128IdCases;
 
 /// <summary>
-/// Main tester for <see cref="Tsinswreng.CsU128Id.ToolU128Id"/>.
+/// Main tester for <see cref="Tsinswreng.CsU128Id.U128IdExtn"/>.
 /// Each partial file below registers one target method's cases.
 /// </summary>
 public partial class TestToolU128Id : ITester{

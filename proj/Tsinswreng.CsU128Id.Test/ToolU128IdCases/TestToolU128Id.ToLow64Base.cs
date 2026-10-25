@@ -3,7 +3,7 @@ using Tsinswreng.CsTreeTest;
 namespace Tsinswreng.CsU128Id.Test.ToolU128IdCases;
 
 /// <summary>
-/// Cases for <see cref="Tsinswreng.CsU128Id.ToolU128Id.ToLow64Base(UInt128)"/>.
+/// Cases for <see cref="Tsinswreng.CsU128Id.U128IdExtn.ToLow64Base(UInt128)"/>.
 /// </summary>
 public partial class TestToolU128Id{
 	/// <summary>
@@ -13,17 +13,17 @@ public partial class TestToolU128Id{
 	public void RegisterToLow64Base(ITestNode Node){
 		var Register = Node.MkTestFnRegister(
 			typeof(TestToolU128Id),
-			[typeof(Tsinswreng.CsU128Id.ToolU128Id)],
-			[nameof(Tsinswreng.CsU128Id.ToolU128Id.ToLow64Base)],
+			[typeof(Tsinswreng.CsU128Id.U128IdExtn)],
+			[nameof(Tsinswreng.CsU128Id.U128IdExtn.ToLow64Base)],
 			"ToLow64Base:"
 		);
 		var R = Register.Register;
 
 		R("encodes-known-small-values", async _ => {
-			AssertEqual("0", Tsinswreng.CsU128Id.ToolU128Id.ToLow64Base(0), "ToLow64Base/zero");
-			AssertEqual("1", Tsinswreng.CsU128Id.ToolU128Id.ToLow64Base(1), "ToLow64Base/one");
-			AssertEqual("_", Tsinswreng.CsU128Id.ToolU128Id.ToLow64Base(63), "ToLow64Base/sixty-three");
-			AssertEqual("10", Tsinswreng.CsU128Id.ToolU128Id.ToLow64Base(64), "ToLow64Base/sixty-four");
+			AssertEqual("0", Tsinswreng.CsU128Id.U128IdExtn.ToLow64Base(0), "ToLow64Base/zero");
+			AssertEqual("1", Tsinswreng.CsU128Id.U128IdExtn.ToLow64Base(1), "ToLow64Base/one");
+			AssertEqual("_", Tsinswreng.CsU128Id.U128IdExtn.ToLow64Base(63), "ToLow64Base/sixty-three");
+			AssertEqual("10", Tsinswreng.CsU128Id.U128IdExtn.ToLow64Base(64), "ToLow64Base/sixty-four");
 			return null;
 		});
 
@@ -36,8 +36,8 @@ public partial class TestToolU128Id{
 				UInt128.MaxValue
 			};
 			foreach(var Value in Cases){
-				var Encoded = Tsinswreng.CsU128Id.ToolU128Id.ToLow64Base(Value);
-				var Decoded = Tsinswreng.CsU128Id.ToolU128Id.Low64BaseToUInt128(Encoded);
+				var Encoded = Tsinswreng.CsU128Id.U128IdExtn.ToLow64Base(Value);
+				var Decoded = Tsinswreng.CsU128Id.U128IdExtn.Low64BaseToUInt128(Encoded);
 				AssertEqual(Value, Decoded, $"ToLow64Base/round-trip/{Value}");
 			}
 			return null;
